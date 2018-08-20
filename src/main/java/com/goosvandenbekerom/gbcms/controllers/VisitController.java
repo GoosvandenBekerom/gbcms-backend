@@ -29,7 +29,7 @@ public class VisitController {
 
     @GetMapping("{id}")
     public Visit getById(@PathVariable long id)  {
-        return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Visit.class, id));
+        return findById(id);
     }
 
     @PostMapping
@@ -41,6 +41,11 @@ public class VisitController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable long id) {
-        service.deleteById(id);
+        Visit visit = findById(id);
+        service.delete(visit);
+    }
+
+    private Visit findById(long id)  {
+        return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Visit.class, id));
     }
 }
