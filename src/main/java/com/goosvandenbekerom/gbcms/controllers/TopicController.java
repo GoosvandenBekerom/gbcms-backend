@@ -3,6 +3,7 @@ package com.goosvandenbekerom.gbcms.controllers;
 import com.goosvandenbekerom.gbcms.domain.Topic;
 import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
 import com.goosvandenbekerom.gbcms.services.TopicService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,8 @@ public class TopicController {
         return service.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
-    public Topic getById(@PathVariable int id) throws EntityNotFoundException {
+    @GetMapping("{id}")
+    public Topic getById(@PathVariable int id)  {
         return findById(id);
     }
 
@@ -34,22 +34,20 @@ public class TopicController {
         return service.save(new Topic(name, false));
     }
 
-    @PutMapping
-    @RequestMapping("{id}")
-    public Topic update(@PathVariable int id, @RequestBody String name) throws EntityNotFoundException {
+    @PutMapping("{id}")
+    public Topic update(@PathVariable int id, @RequestBody String name) {
         Topic topic = findById(id);
         return service.update(topic, name);
     }
 
-    @DeleteMapping
-    @RequestMapping("{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable int id) throws EntityNotFoundException {
+    public void delete(@PathVariable int id)  {
         Topic topic = findById(id);
         service.delete(topic);
     }
 
-    private Topic findById(int id) throws EntityNotFoundException {
+    private Topic findById(int id)  {
         return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Topic.class, id));
     }
 }

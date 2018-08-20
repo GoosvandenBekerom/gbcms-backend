@@ -17,6 +17,7 @@ public @Data class Post {
     private Date updated;
     private String title;
     private String summary;
+    @Lob
     private String content;
     private int visited;
 
