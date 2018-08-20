@@ -11,11 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public @Data class Topic {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String name;
     private Date created;
     private Date updated;
-    private String name;
     private boolean secured;
 
     @OneToMany(mappedBy = "topic")
