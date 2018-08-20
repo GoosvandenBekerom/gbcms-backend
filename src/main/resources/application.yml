@@ -1,0 +1,17 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/gbcms
+        username: root
+        password: password
+    jpa:
+        hibernate:
+            ddl-auto: create
+        show-sql: true
+---
+spring:
+    profiles: live
+    datasource:
+        password: tobecreated
+        username: tobecreated
+    jpa:
+        show-sql: false
