@@ -14,4 +14,6 @@ spring:
         password: tobecreated
         username: tobecreated
     jpa:
+        hibernate:
+            ddl-auto: validate
         show-sql: false
