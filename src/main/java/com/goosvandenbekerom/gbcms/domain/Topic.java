@@ -1,5 +1,6 @@
 package com.goosvandenbekerom.gbcms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,13 +20,19 @@ public @Data class Topic {
     private Date updated;
     private boolean secured;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "topic")
     private List<Post> posts;
 
     public Topic(String name, boolean secured) {
         this.name = name;
         this.secured = secured;
+    }
+
+    @PrePersist
+    public void onPrePersist() {
         this.created = new Date();
+        this.updated = new Date();
     }
 
     @PreUpdate

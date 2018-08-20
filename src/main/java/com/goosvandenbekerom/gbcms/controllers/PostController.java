@@ -33,13 +33,22 @@ public class PostController {
     }
 
     @PostMapping
-    public Post create(@RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody int topicId) {
+    public Post create(@RequestParam("title") String title,
+                       @RequestParam("summary") String summary,
+                       @RequestParam("content") String content,
+                       @RequestParam("topic") int topicId)
+    {
         Topic topic = findTopicById(topicId);
         return service.save(new Post(title, summary, content, topic));
     }
 
     @PutMapping("{id}")
-    public Post update(@PathVariable int id, @RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody int topicId) {
+    public Post update(@PathVariable int id,
+                       @RequestParam("title") String title,
+                       @RequestParam("summary") String summary,
+                       @RequestParam("content") String content,
+                       @RequestParam("topic") int topicId)
+    {
         Post post = findById(id);
         Topic topic = topicService.findById(topicId).orElse(post.getTopic());
         return service.update(post, title, summary, content, topic);

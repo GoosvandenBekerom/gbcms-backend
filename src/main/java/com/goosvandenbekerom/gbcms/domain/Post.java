@@ -1,5 +1,6 @@
 package com.goosvandenbekerom.gbcms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +22,12 @@ public @Data class Post {
     private String content;
     private int visited;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Topic topic;
+    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private List<Visit> visits;
+    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
