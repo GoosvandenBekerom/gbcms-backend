@@ -33,15 +33,15 @@ public class PostController {
     }
 
     @PostMapping
-    public Post create(@RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody String topicName) {
-        Topic topic = findTopicById(topicName);
+    public Post create(@RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody int topicId) {
+        Topic topic = findTopicById(topicId);
         return service.save(new Post(title, summary, content, topic));
     }
 
     @PutMapping("{id}")
-    public Post update(@PathVariable int id, @RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody String topicName) {
+    public Post update(@PathVariable int id, @RequestBody String title, @RequestBody String summary, @RequestBody String content, @RequestBody int topicId) {
         Post post = findById(id);
-        Topic topic = topicService.findById(topicName).orElse(post.getTopic());
+        Topic topic = topicService.findById(topicId).orElse(post.getTopic());
         return service.update(post, title, summary, content, topic);
     }
 
@@ -56,7 +56,7 @@ public class PostController {
         return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Post.class, id));
     }
 
-    private Topic findTopicById(String id) {
+    private Topic findTopicById(int id) {
         return topicService.findById(id).orElseThrow(() -> new EntityNotFoundException(Topic.class, id));
     }
 }

@@ -5,7 +5,7 @@ import com.goosvandenbekerom.gbcms.repositories.TopicRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TopicService extends DomainCrudService<Topic, String, TopicRepository> {
+public class TopicService extends DomainCrudService<Topic, Integer, TopicRepository> {
     public Topic update(Topic topic, String name) {
         if (!name.isEmpty())
             topic.setName(name);

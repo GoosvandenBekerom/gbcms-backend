@@ -11,6 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public @Data class Topic {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(unique = true, length = 30)
     private String name;
     private Date created;
     private Date updated;
@@ -22,12 +25,7 @@ public @Data class Topic {
     public Topic(String name, boolean secured) {
         this.name = name;
         this.secured = secured;
-    }
-
-    @PrePersist
-    public void onPrePersist() {
         this.created = new Date();
-        this.updated = new Date();
     }
 
     @PreUpdate
