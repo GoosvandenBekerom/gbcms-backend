@@ -50,6 +50,6 @@ public class TopicController {
     }
 
     private Topic findById(int id) throws EntityNotFoundException {
-        return service.findById(id).orElseThrow(EntityNotFoundException::new);
+        return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Topic.class, id));
     }
 }
