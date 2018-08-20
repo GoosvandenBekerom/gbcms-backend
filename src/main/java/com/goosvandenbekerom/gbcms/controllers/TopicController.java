@@ -2,7 +2,7 @@ package com.goosvandenbekerom.gbcms.controllers;
 
 import com.goosvandenbekerom.gbcms.domain.Topic;
 import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
-import com.goosvandenbekerom.gbcms.exceptions.UniqueConstraintException;
+import com.goosvandenbekerom.gbcms.exceptions.TopicConstraintException;
 import com.goosvandenbekerom.gbcms.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class TopicController {
         return service.findAll();
     }
 
-    @GetMapping("{name}")
+    @GetMapping("{id}")
     public Topic getById(@PathVariable int id)  {
         return findById(id);
     }
@@ -33,18 +33,26 @@ public class TopicController {
     public Topic create(@RequestParam("name") String name) {
         try {
             return service.save(new Topic(name, false));
+        } catch (EntityNotFoundException enf) {
+            throw enf;
         } catch(Exception e) {
-            throw new UniqueConstraintException(Topic.class);
+            throw new TopicConstraintException();
         }
     }
 
-    @PutMapping("{name}")
-    public Topic update(@PathVariable int id, @RequestBody String name) {
-        Topic topic = findById(id);
-        return service.update(topic, name);
+    @PutMapping("{id}")
+    public Topic update(@PathVariable int id, @RequestParam("name") String name) {
+        try {
+            Topic topic = findById(id);
+            return service.update(topic, name);
+        } catch (EntityNotFoundException enf) {
+            throw enf;
+        } catch(Exception e) {
+            throw new TopicConstraintException();
+        }
     }
 
-    @DeleteMapping("{name}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable int id)  {
         Topic topic = findById(id);

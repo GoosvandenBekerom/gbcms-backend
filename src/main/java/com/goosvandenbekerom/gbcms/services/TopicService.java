@@ -9,6 +9,6 @@ public class TopicService extends DomainCrudService<Topic, Integer, TopicReposit
     public Topic update(Topic topic, String name) {
         if (!name.isEmpty())
             topic.setName(name);
-        return topic;
+        return repo.save(topic);
     }
 }
