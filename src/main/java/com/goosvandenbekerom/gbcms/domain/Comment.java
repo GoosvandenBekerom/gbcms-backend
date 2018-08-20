@@ -16,7 +16,7 @@ public @Data class Comment {
     private Date date;
     private String message;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Post post;
 
     public Comment(String name, String message, Post post) {

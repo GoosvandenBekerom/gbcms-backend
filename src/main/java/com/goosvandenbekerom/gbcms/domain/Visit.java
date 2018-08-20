@@ -14,7 +14,7 @@ public @Data class Visit {
     private long id;
     private String ipaddress;
     private Date date;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Post post;
 
     public Visit(String ipaddress, Post post) {
