@@ -1,5 +1,6 @@
 package com.goosvandenbekerom.gbcms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ public @Data class Comment {
     private String message;
 
     @ManyToOne
+    @JsonIgnoreProperties({"created", "updated", "summary", "content", "visited", "topic" })
     private Post post;
 
     public Comment(String name, String message, Post post) {
