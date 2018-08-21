@@ -21,6 +21,8 @@ public @Data class Post {
     @Lob
     private String content;
 
+    private boolean archived;
+
     @ManyToOne
     private Topic topic;
     @JsonIgnore
@@ -35,6 +37,7 @@ public @Data class Post {
         this.summary = summary;
         this.content = content;
         this.topic = topic;
+        this.archived = false;
     }
 
     @PrePersist

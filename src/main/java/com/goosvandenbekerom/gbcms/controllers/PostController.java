@@ -23,6 +23,16 @@ public class PostController {
     }
 
     @GetMapping
+    public Iterable<Post> getAllNotArchived() {
+        return service.findAllNotArchived();
+    }
+
+    @GetMapping("/archived")
+    public Iterable<Post> getAllArchived() {
+        return service.findAllArchived();
+    }
+
+    @GetMapping("/all")
     public Iterable<Post> getAll() {
         return service.findAll();
     }
@@ -40,6 +50,18 @@ public class PostController {
     {
         Topic topic = findTopicById(topicId);
         return service.save(new Post(title, summary, content, topic));
+    }
+
+    @PostMapping("/archive")
+    public Post archive(@RequestParam("post") int id) {
+        Post post = findById(id);
+        return service.archive(post);
+    }
+
+    @PostMapping("/unarchive")
+    public Post unArchive(@RequestParam("post") int id) {
+        Post post = findById(id);
+        return service.unArchive(post);
     }
 
     @PutMapping("{id}")
