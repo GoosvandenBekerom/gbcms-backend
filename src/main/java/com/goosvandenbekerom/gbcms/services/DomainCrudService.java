@@ -1,11 +1,12 @@
 package com.goosvandenbekerom.gbcms.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;
 
-abstract public class DomainCrudService<T, TID, TREPO extends CrudRepository<T, TID>> {
+abstract public class DomainCrudService<T, TID, TREPO extends PagingAndSortingRepository<T, TID>> {
 
     @Autowired TREPO repo;
 
@@ -25,8 +26,8 @@ abstract public class DomainCrudService<T, TID, TREPO extends CrudRepository<T, 
         return repo.existsById(id);
     }
 
-    public Iterable<T> findAll() {
-        return repo.findAll();
+    public Iterable<T> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     public long count() {

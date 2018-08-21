@@ -5,6 +5,7 @@ import com.goosvandenbekerom.gbcms.exceptions.EntityAlreadyExistsException;
 import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
 import com.goosvandenbekerom.gbcms.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,8 +20,8 @@ public class SubscriptionController {
     }
 
     @GetMapping
-    public Iterable<Subscription> getAll() {
-        return service.findAll();
+    public Iterable<Subscription> getAll(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("{id}")

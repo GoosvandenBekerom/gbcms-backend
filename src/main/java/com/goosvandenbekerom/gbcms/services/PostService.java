@@ -3,6 +3,8 @@ package com.goosvandenbekerom.gbcms.services;
 import com.goosvandenbekerom.gbcms.domain.Post;
 import com.goosvandenbekerom.gbcms.domain.Topic;
 import com.goosvandenbekerom.gbcms.repositories.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +19,12 @@ public class PostService extends DomainCrudService<Post, Integer, PostRepository
         return repo.save(post);
     }
 
-    public List<Post> findAllNotArchived() {
-        return repo.findAllByArchived(false);
+    public Page<Post> findAllNotArchived(Pageable pageable) {
+        return repo.findAllByArchived(false, pageable);
     }
 
-    public List<Post> findAllArchived() {
-        return repo.findAllByArchived(true);
+    public Page<Post> findAllArchived(Pageable pageable) {
+        return repo.findAllByArchived(true, pageable);
     }
 
     public Post archive(Post post) {

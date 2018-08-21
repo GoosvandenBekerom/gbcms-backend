@@ -6,6 +6,7 @@ import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
 import com.goosvandenbekerom.gbcms.services.PostService;
 import com.goosvandenbekerom.gbcms.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,18 +24,18 @@ public class PostController {
     }
 
     @GetMapping
-    public Iterable<Post> getAllNotArchived() {
-        return service.findAllNotArchived();
+    public Iterable<Post> getAllNotArchived(Pageable pageable) {
+        return service.findAllNotArchived(pageable);
     }
 
     @GetMapping("/archived")
-    public Iterable<Post> getAllArchived() {
-        return service.findAllArchived();
+    public Iterable<Post> getAllArchived(Pageable pageable) {
+        return service.findAllArchived(pageable);
     }
 
     @GetMapping("/all")
-    public Iterable<Post> getAll() {
-        return service.findAll();
+    public Iterable<Post> getAll(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("{id}")

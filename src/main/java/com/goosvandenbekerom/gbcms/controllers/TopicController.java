@@ -7,6 +7,7 @@ import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
 import com.goosvandenbekerom.gbcms.exceptions.TopicLengthConstraintException;
 import com.goosvandenbekerom.gbcms.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,8 @@ public class TopicController {
     }
 
     @GetMapping
-    public Iterable<Topic> getAll() {
-        return service.findAll();
+    public Iterable<Topic> getAll(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("{id}")

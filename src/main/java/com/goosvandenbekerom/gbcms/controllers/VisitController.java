@@ -6,6 +6,7 @@ import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
 import com.goosvandenbekerom.gbcms.services.PostService;
 import com.goosvandenbekerom.gbcms.services.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,8 @@ public class VisitController {
     }
 
     @GetMapping
-    public Iterable<Visit> getAll() {
-        return service.findAll();
+    public Iterable<Visit> getAll(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     @GetMapping("{id}")
