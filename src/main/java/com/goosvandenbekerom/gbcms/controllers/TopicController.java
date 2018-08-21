@@ -1,8 +1,10 @@
 package com.goosvandenbekerom.gbcms.controllers;
 
+import com.goosvandenbekerom.gbcms.Constants;
 import com.goosvandenbekerom.gbcms.domain.Topic;
+import com.goosvandenbekerom.gbcms.exceptions.EntityAlreadyExistsException;
 import com.goosvandenbekerom.gbcms.exceptions.EntityNotFoundException;
-import com.goosvandenbekerom.gbcms.exceptions.TopicConstraintException;
+import com.goosvandenbekerom.gbcms.exceptions.TopicLengthConstraintException;
 import com.goosvandenbekerom.gbcms.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,25 +33,17 @@ public class TopicController {
 
     @PostMapping
     public Topic create(@RequestParam("name") String name) {
-        try {
-            return service.save(new Topic(name, false));
-        } catch (EntityNotFoundException enf) {
-            throw enf;
-        } catch(Exception e) {
-            throw new TopicConstraintException();
-        }
+        if (name.length() > Constants.MAX_TOPIC_LENGTH) throw new TopicLengthConstraintException();
+        if (service.existsByName(name)) throw new EntityAlreadyExistsException(Topic.class, name);
+        return service.save(new Topic(name, false));
     }
 
     @PutMapping("{id}")
     public Topic update(@PathVariable int id, @RequestParam("name") String name) {
-        try {
-            Topic topic = findById(id);
-            return service.update(topic, name);
-        } catch (EntityNotFoundException enf) {
-            throw enf;
-        } catch(Exception e) {
-            throw new TopicConstraintException();
-        }
+        if (name.length() > Constants.MAX_TOPIC_LENGTH) throw new TopicLengthConstraintException();
+        if (service.existsByName(name)) throw new EntityAlreadyExistsException(Topic.class, name);
+        Topic topic = findById(id);
+        return service.update(topic, name);
     }
 
     @DeleteMapping("{id}")

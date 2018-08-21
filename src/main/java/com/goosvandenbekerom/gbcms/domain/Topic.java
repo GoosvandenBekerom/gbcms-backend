@@ -1,6 +1,7 @@
 package com.goosvandenbekerom.gbcms.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.goosvandenbekerom.gbcms.Constants;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ public @Data class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true, length = 30)
+    @Column(unique = true, length = Constants.MAX_TOPIC_LENGTH)
     private String name;
     private Date created;
     private Date updated;
