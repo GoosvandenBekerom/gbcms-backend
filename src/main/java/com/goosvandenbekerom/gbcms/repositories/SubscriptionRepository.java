@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface SubscriptionRepository extends PagingAndSortingRepository<Subscription, Integer> {
     boolean existsByEmail(String email);
+
     Optional<Subscription> findFirstByEmail(String email);
 }

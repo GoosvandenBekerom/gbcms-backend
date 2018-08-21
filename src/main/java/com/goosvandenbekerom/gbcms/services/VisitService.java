@@ -5,4 +5,5 @@ import com.goosvandenbekerom.gbcms.repositories.VisitRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VisitService extends DomainCrudService<Visit, Long, VisitRepository> {}
+public class VisitService extends DomainCrudService<Visit, Long, VisitRepository> {
+}

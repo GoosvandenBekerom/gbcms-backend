@@ -9,7 +9,8 @@ import java.util.Date;
 
 @Entity
 @NoArgsConstructor
-public @Data class Comment {
+public @Data
+class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,7 +19,7 @@ public @Data class Comment {
     private String message;
 
     @ManyToOne
-    @JsonIgnoreProperties({"created", "updated", "summary", "content", "visited", "topic" })
+    @JsonIgnoreProperties({"created", "updated", "summary", "content", "visited", "topic"})
     private Post post;
 
     public Comment(String name, String message, Post post) {

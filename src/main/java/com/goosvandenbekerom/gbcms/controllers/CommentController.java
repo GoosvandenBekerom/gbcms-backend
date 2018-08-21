@@ -29,7 +29,7 @@ public class CommentController {
     }
 
     @GetMapping("{id}")
-    public Comment getById(@PathVariable long id)  {
+    public Comment getById(@PathVariable long id) {
         return findById(id);
     }
 
@@ -52,7 +52,7 @@ public class CommentController {
         service.delete(comment);
     }
 
-    private Comment findById(long id)  {
+    private Comment findById(long id) {
         return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Comment.class, id));
     }
 }

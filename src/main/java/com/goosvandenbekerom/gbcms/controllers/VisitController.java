@@ -29,7 +29,7 @@ public class VisitController {
     }
 
     @GetMapping("{id}")
-    public Visit getById(@PathVariable long id)  {
+    public Visit getById(@PathVariable long id) {
         return findById(id);
     }
 
@@ -46,7 +46,7 @@ public class VisitController {
         service.delete(visit);
     }
 
-    private Visit findById(long id)  {
+    private Visit findById(long id) {
         return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Visit.class, id));
     }
 }

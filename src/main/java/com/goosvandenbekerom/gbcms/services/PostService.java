@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class PostService extends DomainCrudService<Post, Integer, PostRepository> {
     public Post update(Post post, String title, String summary, String content, Topic topic) {

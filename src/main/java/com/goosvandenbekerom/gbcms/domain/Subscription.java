@@ -8,7 +8,8 @@ import java.util.Date;
 
 @Entity
 @NoArgsConstructor
-public @Data class Subscription {
+public @Data
+class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

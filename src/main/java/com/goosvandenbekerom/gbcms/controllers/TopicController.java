@@ -28,7 +28,7 @@ public class TopicController {
     }
 
     @GetMapping("{id}")
-    public Topic getById(@PathVariable int id)  {
+    public Topic getById(@PathVariable int id) {
         return findById(id);
     }
 
@@ -49,12 +49,12 @@ public class TopicController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable int id)  {
+    public void delete(@PathVariable int id) {
         Topic topic = findById(id);
         service.delete(topic);
     }
 
-    private Topic findById(int id)  {
+    private Topic findById(int id) {
         return service.findById(id).orElseThrow(() -> new EntityNotFoundException(Topic.class, id));
     }
 }

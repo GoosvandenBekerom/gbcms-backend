@@ -47,8 +47,7 @@ public class PostController {
     public Post create(@RequestParam("title") String title,
                        @RequestParam("summary") String summary,
                        @RequestParam("content") String content,
-                       @RequestParam("topic") int topicId)
-    {
+                       @RequestParam("topic") int topicId) {
         Topic topic = findTopicById(topicId);
         return service.save(new Post(title, summary, content, topic));
     }
@@ -70,8 +69,7 @@ public class PostController {
                        @RequestParam("title") String title,
                        @RequestParam("summary") String summary,
                        @RequestParam("content") String content,
-                       @RequestParam("topic") int topicId)
-    {
+                       @RequestParam("topic") int topicId) {
         Post post = findById(id);
         Topic topic = topicService.findById(topicId).orElse(post.getTopic());
         return service.update(post, title, summary, content, topic);

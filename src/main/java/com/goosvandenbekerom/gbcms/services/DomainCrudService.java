@@ -8,7 +8,8 @@ import java.util.Optional;
 
 abstract public class DomainCrudService<T, TID, TREPO extends PagingAndSortingRepository<T, TID>> {
 
-    @Autowired TREPO repo;
+    @Autowired
+    TREPO repo;
 
     public <S extends T> S save(S entity) {
         return repo.save(entity);

@@ -9,7 +9,8 @@ import java.util.Date;
 
 @Entity
 @NoArgsConstructor
-public @Data class Visit {
+public @Data
+class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,7 +18,7 @@ public @Data class Visit {
     private Date date;
 
     @ManyToOne
-    @JsonIgnoreProperties({"created", "updated", "summary", "content", "visited", "topic" })
+    @JsonIgnoreProperties({"created", "updated", "summary", "content", "visited", "topic"})
     private Post post;
 
     public Visit(String ipaddress, Post post) {

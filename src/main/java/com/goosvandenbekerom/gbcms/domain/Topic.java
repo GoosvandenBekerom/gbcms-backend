@@ -11,7 +11,8 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-public @Data class Topic {
+public @Data
+class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
