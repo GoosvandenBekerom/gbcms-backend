@@ -20,7 +20,6 @@ public @Data class Post {
     private String summary;
     @Lob
     private String content;
-    private int visited;
 
     @ManyToOne
     private Topic topic;
