@@ -12,6 +12,6 @@ public class PostService extends DomainCrudService<Post, Integer, PostRepository
         if (!summary.isEmpty()) post.setSummary(summary);
         if (!content.isEmpty()) post.setContent(content);
         post.setTopic(topic);
-        return post;
+        return repo.save(post);
     }
 }
