@@ -1,5 +1,6 @@
 package com.goosvandenbekerom.gbcms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.goosvandenbekerom.gbcms.Constants;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public @Data class User {
     private int id;
     @Column(unique = true, length = Constants.MAX_USERNAME_LENGTH)
     private String username;
+    @JsonIgnore
     private String password;
     private String firstname;
     private String lastname;
